@@ -1,16 +1,8 @@
 const NodeRSA = require("node-rsa");
-const key = new NodeRSA({ b: 1024 });
 const text = "Hello RSA!";
 
-// const encryptedString = key.encrypt(text, "base64"); //public
-// // console.log("encrypted: ", encryptedString);
-// //dEG34Lyu+QK62MEByUBXAySRQQ4Z9OPxsf6O0cEaZolFxj0TqU3Dv59+KPk5iLKAzw5/RYW3IzKFwR5a8U4/uv4iEfr8hRmi6wqlKLfvPIpSfCsaaTz1S2DavbWDFU+PRLAAQUx3roM2sRAh5C9LIoWf+eBdXeDrGpBxzWa5Myw=
-
-// const decryptedString = key.decrypt(encryptedString, "utf8"); //private
-// console.log("decrypted: ", decryptedString);
-
 var public_key =
-  "----- BEGIN PUBLIC KEY-----\n" +
+  "-----BEGIN PUBLIC KEY-----\n" +
   "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCPjapeuYYRdyAc95XV8ERHc/ov" +
   "6+ZWkmhfsLieSGSW8w8wiyGHCo0fcjtpoSHFuyFXlU4l+ZqQgdgo6WVgNZQTt2iT" +
   "lpvZDLeOcZymfm63aqPGE4FecXJpYuo5jQjI/8p50nbJbh5/FNHjkAKU/CwXpA0W" +
@@ -33,13 +25,16 @@ var private_key =
   "gwICtLtTjJXmzh9+k7212WC0KG4KRlwEM0OPfwl8JnU=\n" +
   "-----END RSA PRIVATE KEY-----";
 
-const key_public = new NodeRSA(private_key);
+const key_public = new NodeRSA(public_key);
 const key_private = new NodeRSA(private_key);
 
 //public key for encryption
-const encryptedString = key_public.encrypt(text, "base64"); //public
+const encryptedString = key_public.encrypt(text, "base64");
 // console.log("encrypted: ", encryptedString);
 
 //private key for decryption
-const decryptedString = key_private.decrypt(encryptedString, "utf8"); //public
-console.log("encrypted: ", decryptedString);
+const decryptedString = key_private.decrypt(encryptedString, "utf8");
+console.log("decrypted: ", decryptedString);
+
+//bu public key
+// console.log(key_public.decrypt(encryptedString, "utf8"));
